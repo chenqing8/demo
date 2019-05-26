@@ -11,7 +11,7 @@
       </ul>
       <div class="foods">
         <div class="foods-item" v-for="(item,index) in goods" :key="index">
-          <div class="title">{{item.name}}</div>
+          <div class="title" id="title">{{item.name}}</div>
           <ul class="foodsList">
             <li class="list border-1px" v-for="(list,id) in item.foods" :key="id">
               <img class="list-img" :src="list.image" alt="商品图片">
@@ -119,6 +119,8 @@ export default {
         this.minPrice = res.data.dataList[0].minPrice;
       }
     });
+    console.log('==========',$("#title"));
+    
   }
 };
 </script>
