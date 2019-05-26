@@ -19,11 +19,11 @@
 
     </div>
     <!-- 购物车商品列表-->
-    <!-- <div class="background"></div> -->
-    <div class="shopCardList">
+    <div class="background" v-show="showCardList" @click="showCardList=false;"></div>
+    <div class="shopCardList" v-show="showCardList">
       <div class="title"> 
         <span>购物车</span>
-        <span  @click="clear">清空</span>
+        <span class="clear" @click="clear">清空</span>
       </div>
       <div class="list">
         <div class="list-item" v-for="(item,index) in shopCardList" :key="index">
@@ -44,7 +44,9 @@ export default {
   name: "shopCard",
   props: ["deliveryPrice", "minPrice", "shopCardList","num","goods","shopcardsId"],
   data() {
-    return {};
+    return {
+      showCardList:false
+    };
   },
   components: {
     "v-contorNum": contorNum,
@@ -63,11 +65,7 @@ export default {
       return (this.minPrice - this.total[0]);
     },
     index1(num){
-      console.log(num);
       let [index,id]=this.shopCardList[num].id.split("-");
-      console.log(index);
-      console.log(id);
-      
       return [index,id];
 },
   },
@@ -75,26 +73,21 @@ export default {
 
     pay(){},
     showSopCard(){
-
+this.showCardList=!this.showCardList;
     },
     getshopCardList(data,data1){
       this.shopCardList=data;
       this.shopcardsId=data1;
     },
     clear(){
-  console.log(this.shopCardList);
 let length=this.shopCardList.length;
-this.shopCardList.map((item,index)=>{
-  console.log(item);
-  
+this.shopCardList.map((item,index)=>{  
   let ids=item.id.split("-");
   this.num[Number(ids[0])].splice(Number(ids[1]),1,0);
   if(this.shopCardList.length-1===index){
   this.shopCardList.splice(0,length);
   this.shopcardsId.splice(0,length);
-
   }
-
 })    
        }
   },
@@ -228,22 +221,23 @@ this.shopCardList.map((item,index)=>{
       font-weight: 200;
       color:rgba(7,17,27);
       line-height: 40px;
-      &:last-child{
+      .clear{
         font-size: 12px;
-        color:#F03E34;
+        color:rgb(0, 160, 220);
         line-height: 40px;
       }
     }
     .list{
        max-height:215px;
         overflow: auto;
-    padding-bottom:4px;
+    padding-bottom:20px;
 
       .list-item{
         padding: 12px 0;
         margin:0 18px;
         display: flex;
         justify-content: space-between;
+        border-bottom: 1px solid rgba(7, 17, 27, .1);;
         .list-item-title{
             font-size: 14px;
             color:rgb(7,17,27);
@@ -253,7 +247,7 @@ this.shopCardList.map((item,index)=>{
             font-size: 14px;
             display: flex;
             align-items: center;
-          &:first-child{
+          >span{
             display: inline-block;
             font-weight: 700;
             color:#F00;
