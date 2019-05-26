@@ -33,15 +33,7 @@
                       <span class="money">{{list.oldPrice}}</span>
                     </span>
                   </span>
-                  <span class="num">
-                    <span
-                      class="icon delete icon-remove_circle_outline"
-                      v-if="num[index][id]>0"
-                      @click="remove(index,id)"
-                    ></span>
-                    <span class="text" v-if="num[index][id]>0">{{num[index][id]}}</span>
-                    <span class="icon add icon-add_circle" @click="add(index,id)"></span>
-                  </span>
+                  <v-contorNum :num="num" :ids="index+'-'+id" :goods="goods" :shopcardsId="shopcardsId" :shopCardList="shopCardList" @getshopCardList="getshopCardList"></v-contorNum>
                 </div>
               </div>
             </li>
@@ -50,13 +42,14 @@
       </div>
     </div>
     <div class="footer">
-      <v-shopcard :minPrice="minPrice" :deliveryPrice="deliveryPrice" :goods="goods"></v-shopcard>
+      <v-shopcard  :num="num"  :goods="goods" :shopcardsId="shopcardsId"  :minPrice="minPrice" :deliveryPrice="deliveryPrice" :shopCardList="shopCardList"></v-shopcard>
     </div>
   </div>
 </template>
 
 <script>
 import shopCard from "../shopCard/shopCard";
+import contorNum from "../shopCard/contorNum";
 export default {
   name: "commodity",
   data() {
@@ -66,11 +59,13 @@ export default {
       num: [], // 保存每个商品选中的个数
       shopCardList: [], // 选中的商品list
       deliveryPrice: "", // 配送费
-      minPrice: "" // 起送费
+      minPrice: "", // 起送费
+      shopcardsId:[],
     };
   },
   components: {
-    "v-shopcard": shopCard
+    "v-shopcard": shopCard,
+    "v-contorNum": contorNum,
   },
   computed: {},
   methods: {
@@ -82,16 +77,25 @@ export default {
      * @desc 找到当前索引的foods，把它添加在shopCardList,并且改变num中的数量
      */
     add(index, id) {
-      this.num[index][id]++;
-      console.log('add===',this.num);
-      console.log('add===',this.goods);
-      this.shopCardList.push({
-        count: this.num[index][id],
-        price: this.goods[index]['foods'][id]['price'],
-        name: this.goods[index]['foods'][id]['name']
-      });
-      console.log('add1===',this.shopCardList);
-
+      // 改变数组的值，不会渲染页面刷新，只有通过这两种方式才可以：
+      // this.$set(this.num[index],id,this.num[index][id]+1);
+      this.num[index].splice(id,1, this.num[index][id]+1);
+      let ids=this.shopcardsId.indexOf(index+""+id);      
+      if(ids>=0){
+        this.shopCardList[ids].count++;
+      }else{
+         this.shopcardsId.push(index+""+id);
+         this.shopCardList.push({
+           id:index+"-"+id,
+          count: this.num[index][id],
+          price: this.goods[index]["foods"][id]["price"],
+          name: this.goods[index]["foods"][id]["name"]
+        });
+      }
+    },
+    getshopCardList(data,data1){
+      this.shopCardList=data;
+      this.shopcardsId=data1;
     }
   },
   mounted() {
@@ -115,13 +119,6 @@ export default {
         this.minPrice = res.data.dataList[0].minPrice;
       }
     });
-  },
-  watch: {
-   num(newName, oldName) { 
-     console.log(this.num); 
-     console.log(newName); 
-     this.num=newName;
-   }
   }
 };
 </script>
