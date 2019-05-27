@@ -91,7 +91,6 @@ export default {
         name: this.goods[index]['foods'][id]['name']
       });
       console.log('add1===',this.shopCardList);
-
     }
   },
   mounted() {
