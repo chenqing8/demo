@@ -11,7 +11,7 @@
       </ul>
       <div class="foods">
         <div class="foods-item" v-for="(item,index) in goods" :key="index">
-          <div class="title">{{item.name}}</div>
+          <div class="title" id="title">{{item.name}}</div>
           <ul class="foodsList">
             <li class="list border-1px" v-for="(list,id) in item.foods" :key="id">
               <img class="list-img" :src="list.image" alt="商品图片">
@@ -33,15 +33,7 @@
                       <span class="money">{{list.oldPrice}}</span>
                     </span>
                   </span>
-                  <span class="num">
-                    <span
-                      class="icon delete icon-remove_circle_outline"
-                      v-if="num[index][id]>0"
-                      @click="remove(index,id)"
-                    ></span>
-                    <span class="text" v-if="num[index][id]>0">{{num[index][id]}}</span>
-                    <span class="icon add icon-add_circle" @click="add(index,id)"></span>
-                  </span>
+                  <v-contorNum :num="num" :ids="index+'-'+id" :goods="goods" :shopcardsId="shopcardsId" :shopCardList="shopCardList" @getshopCardList="getshopCardList"></v-contorNum>
                 </div>
               </div>
             </li>
@@ -50,13 +42,14 @@
       </div>
     </div>
     <div class="footer">
-      <v-shopcard :minPrice="minPrice" :deliveryPrice="deliveryPrice" :goods="goods"></v-shopcard>
+      <v-shopcard  :num="num"  :goods="goods" :shopcardsId="shopcardsId"  :minPrice="minPrice" :deliveryPrice="deliveryPrice" :shopCardList="shopCardList"></v-shopcard>
     </div>
   </div>
 </template>
 
 <script>
 import shopCard from "../shopCard/shopCard";
+import contorNum from "../shopCard/contorNum";
 export default {
   name: "commodity",
   data() {
@@ -66,31 +59,19 @@ export default {
       num: [], // 保存每个商品选中的个数
       shopCardList: [], // 选中的商品list
       deliveryPrice: "", // 配送费
-      minPrice: "" // 起送费
+      minPrice: "", // 起送费
+      shopcardsId:[],
     };
   },
   components: {
-    "v-shopcard": shopCard
+    "v-shopcard": shopCard,
+    "v-contorNum": contorNum,
   },
   computed: {},
   methods: {
-    /**
-     * @method add
-     * @param {index}:menu的索引
-     * @param {id}:foods的索引
-     * @returns
-     * @desc 找到当前索引的foods，把它添加在shopCardList,并且改变num中的数量
-     */
-    add(index, id) {
-      this.num[index][id]++;
-      console.log('add===',this.num);
-      console.log('add===',this.goods);
-      this.shopCardList.push({
-        count: this.num[index][id],
-        price: this.goods[index]['foods'][id]['price'],
-        name: this.goods[index]['foods'][id]['name']
-      });
-      console.log('add1===',this.shopCardList);
+    getshopCardList(data,data1){
+      this.shopCardList=data;
+      this.shopcardsId=data1;
     }
   },
   mounted() {
@@ -114,13 +95,8 @@ export default {
         this.minPrice = res.data.dataList[0].minPrice;
       }
     });
-  },
-  watch: {
-   num(newName, oldName) { 
-     console.log(this.num); 
-     console.log(newName); 
-     this.num=newName;
-   }
+    console.log('==========',$("#title"));
+    
   }
 };
 </script>

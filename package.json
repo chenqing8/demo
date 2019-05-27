@@ -5,13 +5,14 @@
   "author": "Chen大 <1150229571@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --host 0.0.0.0 --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "jquery": "^3.4.1",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
@@ -73,5 +74,15 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenqing8/demo.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chenqing8/demo/issues"
+  },
+  "homepage": "https://github.com/chenqing8/demo#readme"
 }
