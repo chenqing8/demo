@@ -9,6 +9,12 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
+      path: "/",
+      name: "app",
+      redirect: "commodity",
+      meta: "初始路径"
+    },
+    {
       path: "/commodity",
       name: "commodity",
       component: commodity,

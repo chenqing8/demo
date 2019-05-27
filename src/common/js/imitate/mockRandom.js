@@ -51,7 +51,7 @@ const sellerData = () => {
       "foodScore": Random.float(0, 10, 0, 1),
       "rankRate": Random.float(0, 100, 0, 1),
       "minPrice": Random.integer(0, 100),
-      "deliveryPrice": Random.integer(0,20),
+      "deliveryPrice": Random.integer(0, 20),
       "ratingCount": Random.integer(0, 10000),
       "sellCount": Random.integer(0, 1000000),
       "bulletin": Random.cparagraph(10, 50),

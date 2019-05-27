@@ -33,7 +33,7 @@
                       <span class="money">{{list.oldPrice}}</span>
                     </span>
                   </span>
-                  <v-contorNum :num="num" :ids="index+'-'+id" :goods="goods" :shopcardsId="shopcardsId" :shopCardList="shopCardList" @getshopCardList="getshopCardList"></v-contorNum>
+                  <v-contorNum :food="list"></v-contorNum>
                 </div>
               </div>
             </li>
@@ -42,7 +42,12 @@
       </div>
     </div>
     <div class="footer">
-      <v-shopcard  :num="num"  :goods="goods" :shopcardsId="shopcardsId"  :minPrice="minPrice" :deliveryPrice="deliveryPrice" :shopCardList="shopCardList"></v-shopcard>
+      <v-shopcard
+        :minPrice="minPrice"
+        :deliveryPrice="deliveryPrice"
+        :shopCardList="shopCardList"
+        @clear="clear"
+      ></v-shopcard>
     </div>
   </div>
 </template>
@@ -54,24 +59,50 @@ export default {
   name: "commodity",
   data() {
     return {
-      goods: [],
-      suppersClass: ["decrease", "discount", "guarantee", "invoice", "special"],
-      num: [], // 保存每个商品选中的个数
-      shopCardList: [], // 选中的商品list
+      goods: [], // 商品数据
+      suppersClass: ["decrease", "discount", "guarantee", "invoice", "special"], // 控制活动标志的类
       deliveryPrice: "", // 配送费
-      minPrice: "", // 起送费
-      shopcardsId:[],
+      minPrice: "" // 起送费
     };
   },
   components: {
     "v-shopcard": shopCard,
-    "v-contorNum": contorNum,
+    "v-contorNum": contorNum
   },
-  computed: {},
+  computed: {
+    /**
+     * @method shopCardList
+     * @param no
+     * @returns 加入购物车的list
+     * @desc 把商品列表中有包含count的都push到list里面
+     */
+    shopCardList() {
+      let a = [];
+      this.goods.map((item, index) => {
+        item.foods.map((item1, index1) => {
+          if (item1.count) {
+            a.push(item1);
+          }
+        });
+      });
+      return a;
+    }
+  },
   methods: {
-    getshopCardList(data,data1){
-      this.shopCardList=data;
-      this.shopcardsId=data1;
+    /**
+     * @method clear
+     * @param no
+     * @returns 商品类表中的count都归为0
+     * @desc 通过购物车shopCard组件点击clear方法触发的这个来清除goods里面foods.count 的值
+     */
+    clear() {
+      this.goods.map((item, index) => {
+        item.foods.map((item1, index1) => {
+          if (item1.count) {
+            this.$set(item1, (item1.count = 0));
+          }
+        });
+      });
     }
   },
   mounted() {
@@ -95,8 +126,6 @@ export default {
         this.minPrice = res.data.dataList[0].minPrice;
       }
     });
-    console.log('==========',$("#title"));
-    
   }
 };
 </script>
