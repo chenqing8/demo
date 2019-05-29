@@ -25,13 +25,12 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 将设计师给的svg图片上传至icomoonAPP中转化为字体图表，然后按照正常的流程走就是了。把fonts目录拷贝到项目中，然后把style.css拷贝到目录中，然后使用就行了。
 
 ## =============浮层页==============================
- .1.标题利用flex布局实现的
- .2.line-height无效，可能需要给文本添加line-height，，span和p 都能设置。
- .3.动画：不生效，，，，为什么呢？
-
- 4.blur值越大，就会出现白色阴影，？
-  . **解决办法：**
-   .给图片添加  
+ .1.标题利用flex布局实现的<br>
+ .2.line-height无效，可能需要给文本添加line-height，，span和p 都能设置。<br>
+ .3.动画：不生效，，，，为什么呢？<br>
+ 4.blur值越大，就会出现白色阴影，？<br>
+  . **解决办法：**<br>
+   .给图片添加  <br>
       filter: blur(10px);
       transform: scale(1.2);
 
