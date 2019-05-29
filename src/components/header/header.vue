@@ -277,7 +277,7 @@ export default {
     bottom: 0;
     overflow: auto;
     // filter: blur(2px);
-    z-index: 3;
+    z-index: 5;
     background-color: rgba(7, 17, 27, 0.8);
     backdrop-filter: blur(10px);
     .fade-enter-active,

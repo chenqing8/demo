@@ -2,16 +2,21 @@
   <div class="commodity" v-if="goods">
     <div class="warp">
       <ul class="menu">
-        <li class="menu-item border-1px" v-for="(item,index) in goods" :key="index">
+        <li
+          class="menu-item border-1px"
+          v-for="(item,index) in goods"
+          :key="index"
+          @click="foodsDetial(index)"
+        >
           <p class="menu-list">
             <span v-show="item.type>0" :class="suppersClass[item.type]" class="icon"></span>
-            <span class="text">{{item.name}}</span>
+            <span class="text">{{item.name}}{{index}}</span>
           </p>
         </li>
       </ul>
       <div class="foods">
         <div class="foods-item" v-for="(item,index) in goods" :key="index">
-          <div class="title" id="title">{{item.name}}</div>
+          <div class="title" id="titleName">{{item.name}}</div>
           <ul class="foodsList">
             <li class="list border-1px" v-for="(list,id) in item.foods" :key="id">
               <img class="list-img" :src="list.image" alt="商品图片">
@@ -103,7 +108,63 @@ export default {
           }
         });
       });
+    },
+    /**
+     * @method scroll
+     * @param no
+     * @returns
+     * @desc 滚动右侧商品，对应左侧高亮
+     */
+    scroll(inx) {
+      let titleNames = $(".foods>.foods-item");
+      let menus = $(".menu-item");
+      let index = 0;
+      menus.eq(0).addClass("active");
+      $(".foods").scroll(() => {
+        this.$nextTick(() => {
+          if ($(".foods").scrollTop() >= titleNames.eq(index)[0].offsetTop-1) {
+            menus
+              .eq(index)
+              .addClass("active")
+              .siblings()
+              .removeClass("active");
+            if (index < titleNames.length - 1) {
+              index = index + 1;
+            } else {
+              index = titleNames.length - 1;
+            }
+          }  else {
+            if (index > 0) {
+              index = index - 1;
+            } else {
+              index = 0;
+            }
+            menus
+              .eq(index)
+              .addClass("active")
+              .siblings()
+              .removeClass("active");
+          }
+        });
+      });
+    },
+    /**
+     * @method foodsDetial
+     * @param {index} 索引
+     * @returns 返回menu对应索引的foodslist
+     * @desc 点击menu的item右边展示对应的foodslist
+     */
+    foodsDetial(index) {
+      this.$nextTick(() => {
+        let titleNames = $(".foods>.foods-item");
+        let menus = $(".menu-item");
+        let sTop = titleNames.eq(index)[0].offsetTop;
+        $(".foods").animate({ scrollTop: sTop }, 1000);
+      });
     }
+  },
+  updated() {
+    this.scroll(0);
   },
   mounted() {
     this.$http.get("/goods").then(res => {
@@ -189,6 +250,9 @@ export default {
             color: #000;
           }
         }
+      }
+      .active {
+        background-color: #fff;
       }
     }
     .foods {

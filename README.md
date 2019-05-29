@@ -63,3 +63,37 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
     1.增加商品
     2.把加入购物车的商品push到一个新的列表中，，需要有一个字段表示这个数据的索引值
     3.根据索引值修改count数组和goods对应索引的值
+ 7. 商品页面滚动监控？
+    1.点击menuitem,foods会滚动到相应的位置，但是menuitem不会对于应在相应的位置上，推测：在滚动的时候就算没有执行scroll方法，但是也经过了jq自带的scroll函数的，所以改变了index的值。？
+    2.找到了问题：当我点击某个item的时候，`$(".foods").scrollTop()`会逐渐增加，在中途就会出现`if`判断为false的时候，，就会执行` index = index - 1;`,所以导致问题出现。
+    **解决办法：**
+    就是在`titleNames.eq(index)[0].offsetTop`的基础上`-1`,我也还没搞清楚原理，，，不知道为什么减了一就可以了
+    (```)
+     $(".foods").scroll(() => {
+        this.$nextTick(() => {
+          if ($(".foods").scrollTop() >= titleNames.eq(index)[0].offsetTop-1) {
+            menus
+              .eq(index)
+              .addClass("active")
+              .siblings()
+              .removeClass("active");
+            if (index < titleNames.length - 1) {
+              index = index + 1;
+            } else {
+              index = titleNames.length - 1;
+            }
+          }  else {
+            if (index > 0) {
+              index = index - 1;
+            } else {
+              index = 0;
+            }
+            menus
+              .eq(index)
+              .addClass("active")
+              .siblings()
+              .removeClass("active");
+          }
+        });
+      });
+    (```)
