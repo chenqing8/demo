@@ -51,7 +51,9 @@
             <!-- 标题 -->
             <div class="title">{{headerData.name}}</div>
             <!-- 评分star -->
-            <v-star :size="48" :score="headerData.score"></v-star>
+            <div class="star">
+              <v-star :size="48" :score="headerData.score"></v-star>
+            </div>
             <!-- 优惠信息 -->
             <div class="saleInfo">
               <div class="title">
@@ -304,6 +306,9 @@ export default {
           font-size: 16px;
           font-weight: 700;
           line-height: 16px;
+        }
+        .star{
+          margin: 16px 0 28px 0;
         }
         // 优惠信息\商家公告
         .saleInfo,

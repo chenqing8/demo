@@ -10,7 +10,8 @@ import {
 import {
   postData,
   sellerData,
-  goodsData
+  goodsData,
+  ratingsData
 } from "./mockRandom";
 const Mock = require("mockjs"); // 获取mock对象
 
@@ -19,3 +20,4 @@ const Mock = require("mockjs"); // 获取mock对象
 Mock.mock(`${domain}/posts`, "get", postData);
 Mock.mock(`${domain}/sellers`, "get", sellerData);
 Mock.mock(`${domain}/goods`, "get", goodsData);
+Mock.mock(`${domain}/ratings`, "get", ratingsData);

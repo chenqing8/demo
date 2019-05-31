@@ -21,7 +21,7 @@
             <li class="list border-1px" v-for="(list,id) in item.foods" :key="id">
               <img class="list-img" :src="list.image" alt="商品图片">
               <div class="list-content">
-                <span class="title">{{list.name}}</span>
+                <span class="title" @click="showfoodslist(list)">{{list.name}}</span>
                 <span class="description" v-if="list.description">{{list.description}}</span>
                 <span class="saleNum">
                   <span class="num">月售{{list.sellCount}}份</span>
@@ -45,6 +45,8 @@
           </ul>
         </div>
       </div>
+      <!-- 商品详情 -->
+      <v-commodityDetial :foods="foodslist" v-if="showFoodsDetial" @goback="showFoodsDetial=false" ref="commoditydetial"></v-commodityDetial>
     </div>
     <div class="footer">
       <v-shopcard
@@ -60,6 +62,7 @@
 <script>
 import shopCard from "../shopCard/shopCard";
 import contorNum from "../shopCard/contorNum";
+import commodityDetial from "../commodity/commodityDetial";
 export default {
   name: "commodity",
   data() {
@@ -67,12 +70,15 @@ export default {
       goods: [], // 商品数据
       suppersClass: ["decrease", "discount", "guarantee", "invoice", "special"], // 控制活动标志的类
       deliveryPrice: "", // 配送费
-      minPrice: "" // 起送费
+      minPrice: "", // 起送费
+      showFoodsDetial: false, // 展示商品详情页
+      foodslist: {}, // 商品详情信息
     };
   },
   components: {
     "v-shopcard": shopCard,
-    "v-contorNum": contorNum
+    "v-contorNum": contorNum,
+    "v-commodityDetial": commodityDetial
   },
   computed: {
     /**
@@ -122,7 +128,10 @@ export default {
       menus.eq(0).addClass("active");
       $(".foods").scroll(() => {
         this.$nextTick(() => {
-          if ($(".foods").scrollTop() >= titleNames.eq(index)[0].offsetTop-1) {
+          if (
+            $(".foods").scrollTop() >=
+            titleNames.eq(index)[0].offsetTop - 1
+          ) {
             menus
               .eq(index)
               .addClass("active")
@@ -133,7 +142,7 @@ export default {
             } else {
               index = titleNames.length - 1;
             }
-          }  else {
+          } else {
             if (index > 0) {
               index = index - 1;
             } else {
@@ -161,6 +170,16 @@ export default {
         let sTop = titleNames.eq(index)[0].offsetTop;
         $(".foods").animate({ scrollTop: sTop }, 1000);
       });
+    },
+    /**
+     * @method showfoodslist
+     * @param {list} 每一列商品的详细信息
+     * @returns
+     * @desc 把商品信息赋值给foodslist
+     */
+    showfoodslist(list) {
+      this.foodslist = list;
+      this.showFoodsDetial = true;
     }
   },
   updated() {
@@ -171,7 +190,7 @@ export default {
       if (res.status === 200) {
         this.goods = res.data;
         let Num = [];
-        res.data.map((item, index) => {
+        this.goods.map((item, index) => {
           let num = [];
           item.foods.map((item1, index1) => {
             num.push(0);

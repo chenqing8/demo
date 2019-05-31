@@ -33,6 +33,7 @@ export default {
   methods: {},
   mounted() {
     this.$http.get("/sellers").then(res => {
+      console.log(res);
       if (res.status === 200) {
         this.headerDataList = res.data.dataList[0];
       } else console.log("/sellers 出错");

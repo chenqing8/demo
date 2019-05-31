@@ -215,12 +215,12 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 0;
+    z-index: 1;
     background: rgba(7, 17, 27, 0.6);
     backdrop-filter: blur(10px);
   }
   .shopCardList {
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     bottom: 47px;
     width: 100%;

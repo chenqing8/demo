@@ -56,13 +56,13 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
     2. 判断该商品是否有count字段。<br>
     3. 没有就给她加一个字段，有就++。<br>
     4. 遍历商品的数据，，取出带有count的，push到另一个数组里面去<br>
-    5.然后显示在购物车列表中<br>
+    5. 然后显示在购物车列表中<br>
     ***思路2：给购物车组件传递所有的foods数据***<br>
     1. 事先遍历一个count数组用来装，商品列表中选择商品的数量。<br>
     1. 增加商品<br>
     2. 把加入购物车的商品push到一个新的列表中，，需要有一个字段表示这个数据的索引值<br>
     3. 根据索引值修改count数组和goods对应索引的值<br>
- 7. **商品页面滚动监控？**<br>
+ 7. **商品页面滚动监控？(用插件better-scroll来实现)**<br>
     1.点击menuitem,foods会滚动到相应的位置，但是menuitem不会对于应在相应的位置上，推测：在滚动的时候就算没有执行scroll方法，但是也经过了jq自带的scroll函数的，所以改变了index的值。？<br>
     2.找到了问题：当我点击某个item的时候，`$(".foods").scrollTop()`会逐渐增加，在中途就会出现`if`判断为false的时候，，就会执行` index = index - 1;`,所以导致问题出现。<br>
     ***解决办法：***<br>
@@ -96,3 +96,22 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
         });
       });
     ```
+8. **点赞，点那个亮哪个？**<br>
+    问题就是，不可能有几个item 就用几个变量控制他的class吧<br>
+    ***解决办法：***<br>
+   1. jquery，增删class
+   2. 通过给对象字段（没有就增加），根据是否那那个字段或者字段的true or false 来弄
+   ```
+    isOrNoLike(index) {
+        let item=this.foods.ratings[index];
+        console.log(item);
+        if(!item.islike){
+            this.$set(item,"islike",true)
+        }else{
+            this.$set(item,"islike",false)            
+        }
+        console.log(item);
+    },
+   ```
+ 9. 
+ 

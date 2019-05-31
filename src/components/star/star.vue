@@ -79,7 +79,6 @@ export default {
 .star {
   font-size: 0;
   text-align: center;
-  margin: 16px 0 26px 0;
   .star-item {
     display: inline-block;
   }
