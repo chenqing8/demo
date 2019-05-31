@@ -46,21 +46,17 @@
         </div>
       </div>
       <!-- 商品详情 -->
-      <v-commodityDetial :foods="foodslist" v-if="showFoodsDetial" @goback="showFoodsDetial=false" ref="commoditydetial"></v-commodityDetial>
-    </div>
-    <div class="footer">
-      <v-shopcard
-        :minPrice="minPrice"
-        :deliveryPrice="deliveryPrice"
-        :shopCardList="shopCardList"
-        @clear="clear"
-      ></v-shopcard>
+      <v-commodityDetial
+        :foods="foodslist"
+        v-if="showFoodsDetial"
+        @goback="showFoodsDetial=false"
+        ref="commoditydetial"
+      ></v-commodityDetial>
     </div>
   </div>
 </template>
 
 <script>
-import shopCard from "../shopCard/shopCard";
 import contorNum from "../shopCard/contorNum";
 import commodityDetial from "../commodity/commodityDetial";
 export default {
@@ -72,49 +68,15 @@ export default {
       deliveryPrice: "", // 配送费
       minPrice: "", // 起送费
       showFoodsDetial: false, // 展示商品详情页
-      foodslist: {}, // 商品详情信息
+      foodslist: {} // 商品详情信息
     };
   },
   components: {
-    "v-shopcard": shopCard,
     "v-contorNum": contorNum,
     "v-commodityDetial": commodityDetial
   },
-  computed: {
-    /**
-     * @method shopCardList
-     * @param no
-     * @returns 加入购物车的list
-     * @desc 把商品列表中有包含count的都push到list里面
-     */
-    shopCardList() {
-      let a = [];
-      this.goods.map((item, index) => {
-        item.foods.map((item1, index1) => {
-          if (item1.count) {
-            a.push(item1);
-          }
-        });
-      });
-      return a;
-    }
-  },
+  computed: {},
   methods: {
-    /**
-     * @method clear
-     * @param no
-     * @returns 商品类表中的count都归为0
-     * @desc 通过购物车shopCard组件点击clear方法触发的这个来清除goods里面foods.count 的值
-     */
-    clear() {
-      this.goods.map((item, index) => {
-        item.foods.map((item1, index1) => {
-          if (item1.count) {
-            this.$set(item1, (item1.count = 0));
-          }
-        });
-      });
-    },
     /**
      * @method scroll
      * @param no
@@ -186,26 +148,10 @@ export default {
     this.scroll(0);
   },
   mounted() {
-    this.$http.get("/goods").then(res => {
-      if (res.status === 200) {
-        this.goods = res.data;
-        let Num = [];
-        this.goods.map((item, index) => {
-          let num = [];
-          item.foods.map((item1, index1) => {
-            num.push(0);
-          });
-          Num.push(num);
-        });
-        this.num = Num;
-      }
-    });
-    this.$http.get("/sellers").then(res => {
-      if (res.status === 200) {
-        this.deliveryPrice = res.data.dataList[0].deliveryPrice;
-        this.minPrice = res.data.dataList[0].minPrice;
-      }
-    });
+    this.goods=this.$store.state.goods;
+    let sellers = this.$store.state.sellers;
+    this.deliveryPrice = sellers.deliveryPrice;
+    this.minPrice = sellers.minPrice;
   }
 };
 </script>

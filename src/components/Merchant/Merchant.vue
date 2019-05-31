@@ -90,12 +90,7 @@ export default {
   computed: {},
   methods: {},
   mounted() {
-    this.$http.get("/sellers").then(res => {
-      if (res.status === 200) {
-        this.sellers = res.data.dataList[0];
-        console.log(this.sellers);
-      }
-    });
+    this.sellers = this.$store.state.sellers;
   }
 };
 </script>
@@ -154,6 +149,7 @@ export default {
       display: flex;
       margin: 0 18px;
       margin-top: 18px;
+
       li {
         flex: 1;
         margin: auto;
@@ -244,6 +240,7 @@ export default {
     }
   }
   .info {
+    margin-bottom: 47px;
     ul {
       li {
         padding: 16px 12px;

@@ -51,7 +51,7 @@
             <div class="left">
               <p class="text">{{item.username}}</p>
               <div class="star">
-                <v-star class="starItem" :size="36" :score="foodScore"></v-star>
+                <v-star class="starItem" :size="36" :score="item.score"></v-star>
                 <p class="text">{{item.deliveryTime}}分钟送达</p>
               </div>
             </div>
@@ -62,7 +62,11 @@
         </div>
         <p class="comment">{{item.text}}</p>
         <div class="signIcon">
-          <span class="icon icon-thumb_down" :class="{'active':item.islike,'icon-thumb_up':item.islike}" @click="isOrNoLike(index)"></span>
+          <span
+            class="icon icon-thumb_down"
+            :class="{'active':item.islike,'icon-thumb_up':item.islike}"
+            @click="isOrNoLike(index)"
+          ></span>
           <span class="sign" v-for="(item1,index1) in item.recommend" :key="index1">{{item1}}</span>
         </div>
       </li>
@@ -207,20 +211,19 @@ export default {
   },
   mounted() {
     this.$http.get("/ratings").then(res => {
-      console.log(res);
       if (res.status === 200) {
         this.rating = res.data;
+        console.log(this.rating);
+        // this.$store.commit("setRatings", this.rating);
       }
     });
-    this.$http.get("/sellers").then(res => {
-      if (res.status === 200) {
-        this.total = res.data.dataList[0].score;
-        this.deliveryTime = res.data.dataList[0].deliveryTime;
-        this.rankRate = res.data.dataList[0].rankRate;
-        this.serviceScore = res.data.dataList[0].serviceScore;
-        this.foodScore = res.data.dataList[0].foodScore;
-      }
-    });
+    let sellers = this.$store.state.sellers;
+    this.total = sellers.score;
+    this.deliveryTime = sellers.deliveryTime;
+    this.rankRate = sellers.rankRate;
+    this.serviceScore = sellers.serviceScore;
+    this.foodScore = sellers.foodScore;
+    console.log(sellers);
   }
 };
 </script>
@@ -331,6 +334,7 @@ export default {
   }
   .commentList {
     border-top: 1px solid rgba(7, 17, 27, 0.1);
+    margin-bottom: 47px;
     .commentListItem {
       padding: 16px 0;
       margin: 0 18px;
@@ -394,7 +398,7 @@ export default {
           color: rgb(147, 153, 159);
           line-height: 16px;
         }
-        .active{
+        .active {
           color: rgb(0, 160, 220);
         }
         .sign {

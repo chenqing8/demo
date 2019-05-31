@@ -13,30 +13,86 @@
       </div>
     </div>
     <router-view></router-view>
+    <div class="footer">
+      <v-shopcard
+        :minPrice="minPrice"
+        :deliveryPrice="deliveryPrice"
+        :shopCardList="shopCardList"
+        @clear="clear"
+      ></v-shopcard>
+    </div>
   </div>
 </template>
 
 <script>
+import shopCard from "@/shopCard/shopCard";
+
 import Header from "@/header/header";
 export default {
   name: "app",
   data() {
     return {
       name: 154,
-      headerDataList: []
+      headerDataList: [],
+      goods: [],
+      deliveryPrice: 0,
+      minPrice: 0
     };
   },
   components: {
+    "v-shopcard": shopCard,
     "v-header": Header
   },
-  computed: {},
-  methods: {},
+  computed: {
+    /**
+     * @method shopCardList
+     * @param no
+     * @returns 加入购物车的list
+     * @desc 把商品列表中有包含count的都push到list里面
+     */
+    shopCardList() {
+      let a = [];
+      this.goods.map((item, index) => {
+        item.foods.map((item1, index1) => {
+          if (item1.count) {
+            a.push(item1);
+          }
+        });
+      });
+      return a;
+    }
+  },
+  methods: {
+    /**
+     * @method clear
+     * @param no
+     * @returns 商品类表中的count都归为0
+     * @desc 通过购物车shopCard组件点击clear方法触发的这个来清除goods里面foods.count 的值
+     */
+    clear() {
+      this.goods.map((item, index) => {
+        item.foods.map((item1, index1) => {
+          if (item1.count) {
+            this.$set(item1, (item1.count = 0));
+          }
+        });
+      });
+    }
+  },
   mounted() {
     this.$http.get("/sellers").then(res => {
-      console.log(res);
       if (res.status === 200) {
         this.headerDataList = res.data.dataList[0];
+        this.$store.commit("setSellers", this.headerDataList);
+        this.deliveryPrice = this.headerDataList.deliveryPrice;
+        this.minPrice = this.headerDataList.minPrice;
       } else console.log("/sellers 出错");
+    });
+    this.$http.get("/goods").then(res => {
+      if (res.status === 200) {
+        this.goods = res.data;
+        this.$store.commit("setGoods", this.goods);
+      }
     });
   }
 };
@@ -66,6 +122,12 @@ export default {
         }
       }
     }
+  }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 }
 </style>
