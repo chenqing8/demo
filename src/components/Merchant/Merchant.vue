@@ -52,7 +52,7 @@
       </div>
     </v-pannel>
     <v-pannel class="scene">
-      <div slot="header">商家实景</div>
+      <div class="scene-heaser" slot="header">商家实景</div>
       <div slot="content">
         <ul>
           <li v-for="(item,index) in sellers.pics" :key="index">
@@ -62,7 +62,7 @@
       </div>
     </v-pannel>
     <v-pannel class="info">
-      <div slot="header">商家信息</div>
+      <div class="scene-heaser" slot="header">商家信息</div>
       <div slot="content">
         <ul>
           <li v-for="(item,index) in sellers.infos" :key="index">{{item}}</li>
@@ -233,6 +233,9 @@ export default {
     }
   }
   .scene {
+    .scene-heaser {
+      margin-bottom: 12px;
+    }
     ul {
       display: flex;
       overflow-x: auto;
@@ -249,6 +252,9 @@ export default {
   }
   .info {
     margin-bottom: 47px;
+    .scene-heaser {
+      margin-bottom: 12px;
+    }
     ul {
       li {
         padding: 16px 12px;
