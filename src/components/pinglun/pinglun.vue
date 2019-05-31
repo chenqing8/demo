@@ -27,15 +27,15 @@
       <div class="pinglun-header" slot="content">
         <span class="button all" @click="_all">
           <span class="text">全部</span>
-          <span class="num">{{all_comment}}</span>
+          <span class="num">{{ratings[1]}}</span>
         </span>
         <span class="button best" @click="best">
           <span class="text">推荐</span>
-          <span class="num">{{best_comment}}</span>
+          <span class="num">{{ratings[2]}}</span>
         </span>
         <span class="button bad" @click="_bad">
           <span class="text">吐槽</span>
-          <span class="num">{{bad_comment}}</span>
+          <span class="num">{{ratings[3]}}</span>
         </span>
       </div>
     </v-pannel>
@@ -44,7 +44,7 @@
       <span class="text">只看有内容的评论</span>
     </div>
     <ul class="commentList">
-      <li class="commentListItem" v-for="(item,index) in ratings" :key="index">
+      <li class="commentListItem" v-for="(item,index) in ratings[0]" :key="index">
         <div class="userInfo">
           <img class="user-avatar" :src="item.avatar" alt>
           <div class="info">
@@ -85,10 +85,10 @@ export default {
       isShowNotNullContent: false, // 用于传递给详情页面是否展示没有内容的评论
       rateType: "-1",
       all_comment: 0, // 全部评论
-      best_comment: 0, //推荐评论
-      bad_comment: 0, //吐槽评论
+      best_comment: 0, // 推荐评论
+      bad_comment: 0, // 吐槽评论
       total: 0, // 评分总和
-      deliveryTime: 0, //配送时间
+      deliveryTime: 0, // 配送时间
       rankRate: 0, // 高于周边比率
       serviceScore: 0, // 服务评分
       foodScore: 0 // 食物评分
@@ -145,19 +145,19 @@ export default {
             break;
         }
       });
-      this.all_comment = allnum;
-      this.best_comment = bestnum;
-      this.bad_comment = badnum;
-      if (this.rateType == "0") {
-        return allList;
-      } else if (this.rateType == "1") {
-        return bestList;
-      } else if (this.rateType == "2") {
-        return badList;
+      // this.all_comment = allnum;
+      // this.best_comment = bestnum;
+      // this.bad_comment = badnum;
+      if (this.rateType === "0") {
+        return [allList, allnum, bestnum, badnum];
+      } else if (this.rateType === "1") {
+        return [bestList, allnum, bestnum, badnum];
+      } else if (this.rateType === "2") {
+        return [badList, allnum, bestnum, badnum];
       } else if (!this.isShowNotNullContent) {
-        return this.rating;
+        return [this.rating, allnum, bestnum, badnum];
       } else {
-        return list;
+        return [list, allnum, bestnum, badnum];
       }
     }
   },
@@ -213,8 +213,6 @@ export default {
     this.$http.get("/ratings").then(res => {
       if (res.status === 200) {
         this.rating = res.data;
-        console.log(this.rating);
-        // this.$store.commit("setRatings", this.rating);
       }
     });
     let sellers = this.$store.state.sellers;
@@ -223,7 +221,6 @@ export default {
     this.rankRate = sellers.rankRate;
     this.serviceScore = sellers.serviceScore;
     this.foodScore = sellers.foodScore;
-    console.log(sellers);
   }
 };
 </script>

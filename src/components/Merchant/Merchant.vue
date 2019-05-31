@@ -11,7 +11,7 @@
           </P>
         </div>
         <div class="collection">
-          <span class="icon icon-favorite"></span>
+          <span class="icon icon-favorite" :class="{'active':merIsLike}" @click="IsLike"></span>
           <span class="text">收藏</span>
         </div>
       </div>
@@ -80,7 +80,8 @@ export default {
   data() {
     return {
       suppersClass: ["decrease", "discount", "guarantee", "invoice", "special"], // 控制活动标志的类
-      sellers: {}
+      sellers: {},
+      merIsLike: false // 收藏商家
     };
   },
   components: {
@@ -88,7 +89,11 @@ export default {
     "v-pannel": pannel
   },
   computed: {},
-  methods: {},
+  methods: {
+    IsLike() {
+      this.merIsLike = !this.merIsLike;
+    }
+  },
   mounted() {
     this.sellers = this.$store.state.sellers;
   }
@@ -137,6 +142,9 @@ export default {
           font-size: 24px;
           line-height: 24px;
           margin-bottom: 4px;
+        }
+        .active {
+          color: rgb(240, 20, 20);
         }
         .text {
           font-size: 10px;

@@ -1214,7 +1214,6 @@ const ratingsData = () => {
       "deliveryTime": "",
       "score": 4,
       "rateType": 0,
-      "deliveryTime": "",
       "text": "服务态度不错",
       "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png",
       "recommend": [

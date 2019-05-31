@@ -128,7 +128,6 @@ export default {
     foodsDetial(index) {
       this.$nextTick(() => {
         let titleNames = $(".foods>.foods-item");
-        let menus = $(".menu-item");
         let sTop = titleNames.eq(index)[0].offsetTop;
         $(".foods").animate({ scrollTop: sTop }, 1000);
       });
@@ -148,7 +147,7 @@ export default {
     this.scroll(0);
   },
   mounted() {
-    this.goods=this.$store.state.goods;
+    this.goods = this.$store.state.goods;
     let sellers = this.$store.state.sellers;
     this.deliveryPrice = sellers.deliveryPrice;
     this.minPrice = sellers.minPrice;
