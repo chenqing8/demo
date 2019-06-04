@@ -1,0 +1,43 @@
+{
+    "vue-template": {
+      "prefix": "vue",
+      "body": [
+        "<template>",
+        "  <div class=\"$1\">",
+        "$2",
+        "  </div>",
+        "</template>",
+        "",
+        "<script>",
+        "export default {",
+        "  name: \"$1\",",
+        "  data() {",
+        "    return {",
+        "",
+        "    };",
+        "  },",
+        "  components: {",
+        "",
+        "  },",
+        "  computed: {",
+        "",
+        "  },",
+        "  methods: {",
+        "",
+        "  },",
+        "  mounted() {",
+        "",
+        "  }",
+        "};",
+        "</script>",
+        "",
+        "<style lang=\"less\" scoped>",
+        ".$1{",
+          "",
+        "}",
+        "</style>",
+        ""
+      ],
+      "description": "vue template"
+    }
+  }

@@ -271,7 +271,7 @@ export default {
       }
       .num {
         font-size: 12px;
-        margin-left: -4px;
+        margin-left: 6px;
         color: rgb(255, 153, 0);
         line-height: 18px;
       }
@@ -361,7 +361,7 @@ export default {
               display: flex;
               align-items: center;
               .starItem {
-                margin: 4px -10px 6px 0;
+                margin: 4px 0px 6px 0;
               }
               .text {
                 font-size: 10px;

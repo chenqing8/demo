@@ -22,24 +22,26 @@
     </div>
     <!-- 购物车商品列表-->
     <div class="background" v-show="showCardList" @click="showCardList=false;"></div>
-    <div class="shopCardList" v-show="showCardList">
-      <div class="title">
-        <span>购物车</span>
-        <span class="clear" @click="clear">清空</span>
-      </div>
-      <div class="list">
-        <div class="list-item" v-for="(item1,index1) in shopCardList" :key="index1">
-          <div class="list-item-title">{{item1.name}}</div>
-          <div class="list-item-num">
-            <span>
-              <span class="icon">￥</span>
-              {{item1.count*item1.price}}
-            </span>
-            <v-contorNum :food="item1"></v-contorNum>
+    <transition name="fade">
+      <div class="shopCardList" v-show="showCardList">
+        <div class="title">
+          <span>购物车</span>
+          <span class="clear" @click="clear">清空</span>
+        </div>
+        <div class="list">
+          <div class="list-item" v-for="(item1,index1) in shopCardList" :key="index1">
+            <div class="list-item-title">{{item1.name}}</div>
+            <div class="list-item-num">
+              <span>
+                <span class="icon">￥</span>
+                {{item1.count*item1.price}}
+              </span>
+              <v-contorNum :food="item1"></v-contorNum>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -112,6 +114,19 @@ export default {
 <style lang="less" scoped>
 .card {
   font-size: 0;
+  .fade-enter,
+  .fade-leave-to {
+    transform: translateY(210px)
+  }
+  .fade-enter-to,
+  .fade-leave {
+    transform: translateY(0)    
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all 0.3s ease;
+  }
+
   .shopCard {
     height: 47px;
     width: 100%;

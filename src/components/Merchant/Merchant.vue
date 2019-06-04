@@ -129,7 +129,7 @@ export default {
           color: rgb(77, 85, 93);
           line-height: 18px;
           .text1 {
-            margin: 0 12px 0 -8px;
+            margin: 0 12px 0 2px;
           }
         }
       }
@@ -137,6 +137,20 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+        .fade-enter,
+        .fade-leave-to {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        .fade-enter-to,
+        .fade-leave {
+          opacity: 1;
+          transform: scale(1.1);
+        }
+        .fade-enter-active,
+        .fade-leave-active {
+          transition: all 0.3s ease;
+        }
         .icon {
           color: rgb(77, 85, 93);
           font-size: 24px;

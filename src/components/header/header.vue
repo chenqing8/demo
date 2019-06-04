@@ -122,6 +122,18 @@ export default {
 .header {
   position: relative;
   background-color: rgba(7, 17, 27, 0.5);
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+  }
+  .fade-enter-to,
+  .fade-leave {
+    opacity: 1;
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all 0.3s ease;
+  }
   // 内容区域
   .header-content {
     padding: 24px 0 18px 24px;
@@ -307,7 +319,7 @@ export default {
           font-weight: 700;
           line-height: 16px;
         }
-        .star{
+        .star {
           margin: 16px 0 28px 0;
         }
         // 优惠信息\商家公告

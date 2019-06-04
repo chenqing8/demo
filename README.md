@@ -28,6 +28,22 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
  1.标题利用flex布局实现的<br>
  2.line-height无效，可能需要给文本添加line-height，，span和p 都能设置。<br>
  3.动画：不生效，，，，为什么呢？<br>
+    **解决办法**
+    ```
+    .fade-enter,
+    .fade-enter-to{
+      opacity: 0;
+    }
+    .fade-enter-to,
+    .fade-leave {
+      opacity: 0.6;
+      transform: translateX(-5px);
+    }
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: all .3s ease;
+    }
+    ```
  4.blur值越大，就会出现白色阴影，？<br>
    ***解决办法：***<br>
    给图片添加  <br>

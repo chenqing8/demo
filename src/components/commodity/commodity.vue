@@ -10,7 +10,7 @@
         >
           <p class="menu-list">
             <span v-show="item.type>0" :class="suppersClass[item.type]" class="icon"></span>
-            <span class="text">{{item.name}}{{index}}</span>
+            <span class="text">{{item.name}}</span>
           </p>
         </li>
       </ul>
@@ -46,12 +46,14 @@
         </div>
       </div>
       <!-- 商品详情 -->
-      <v-commodityDetial
-        :foods="foodslist"
-        v-if="showFoodsDetial"
-        @goback="showFoodsDetial=false"
-        ref="commoditydetial"
-      ></v-commodityDetial>
+      <transition name="fade">
+        <v-commodityDetial
+          :foods="foodslist"
+          v-if="showFoodsDetial"
+          @goback="showFoodsDetial=false"
+          ref="commoditydetial"
+        ></v-commodityDetial>
+      </transition>
     </div>
   </div>
 </template>
@@ -165,6 +167,18 @@ export default {
     top: 174px;
     bottom: 47px;
     font-size: 0;
+    .fade-enter,
+    .fade-leave-to {
+      opacity: 0;
+    }
+    .fade-enter-to,
+    .fade-leave {
+      opacity: 1;
+    }
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: all 0.4s ease-in-out;
+    }
     .menu {
       overflow: auto;
       .menu-item {
