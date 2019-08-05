@@ -81,7 +81,7 @@ export default {
     return {
       suppersClass: ["decrease", "discount", "guarantee", "invoice", "special"], // 控制活动标志的类
       sellers: {},
-      merIsLike: false // 收藏商家
+      merIsLike: this.$store.state.merIsLike // 收藏商家
     };
   },
   components: {
@@ -92,6 +92,7 @@ export default {
   methods: {
     IsLike() {
       this.merIsLike = !this.merIsLike;
+      this.$store.commit('setIsLike',this.merIsLike)
     }
   },
   mounted() {

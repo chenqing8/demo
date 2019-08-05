@@ -1,15 +1,15 @@
 <template>
   <div class="app">
     <v-header :headerData="headerDataList"></v-header>
-    <div class="tab border-1px">
+    <div class="tab">
       <div class="tab_item">
-        <router-link tag="a" :to="{name:'commodity'}">商品</router-link>
+        <router-link tag="a" to="/commodity">商品</router-link>
       </div>
       <div class="tab_item">
-        <router-link tag="a" :to="{name:'pinglun'}">评论</router-link>
+        <router-link tag="a" to="/Merchant">商家</router-link>        
       </div>
       <div class="tab_item">
-        <router-link tab="a" :to="{name:'Merchant'}">商家</router-link>
+        <router-link tag="a" to="/pinglun">评论</router-link>        
       </div>
     </div>
     <router-view></router-view>
@@ -26,7 +26,6 @@
 
 <script>
 import shopCard from "@/shopCard/shopCard";
-
 import Header from "@/header/header";
 export default {
   name: "app",
@@ -36,7 +35,10 @@ export default {
       headerDataList: [],
       goods: [],
       deliveryPrice: 0,
-      minPrice: 0
+      minPrice: 0,
+      totalCol: 24, //总列数
+      labelCol: 0, //label所占列数
+      colWidth: 40, //每单位宽度
     };
   },
   components: {
@@ -102,6 +104,7 @@ export default {
 @import "../src/common/less/reset.less";
 @import "../src/common/less/font.less";
 @import "../src/common/less/common.less";
+
 .app {
   > .tab {
     display: flex;

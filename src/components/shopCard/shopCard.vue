@@ -36,7 +36,7 @@
                 <span class="icon">￥</span>
                 {{item1.count*item1.price}}
               </span>
-              <v-contorNum :food="item1"></v-contorNum>
+              <v-contorNum :food="item1" @clearShopList="clearShopList"></v-contorNum>
             </div>
           </div>
         </div>
@@ -93,6 +93,7 @@ export default {
      * @desc 用来显示或者隐藏遮罩
      */
     showSopCard() {
+      if(this.total[1]>0)
       this.showCardList = !this.showCardList;
     },
     /**
@@ -105,6 +106,9 @@ export default {
       this.$set(this.shopCardList, []);
       this.showCardList = false;
       this.$emit("clear");
+    },
+    clearShopList(){
+      this.showCardList = false;
     }
   },
   mounted() {}
@@ -191,7 +195,7 @@ export default {
       color: rgba(255, 255, 255, 0.4);
       line-height: 24px;
       .mark {
-        font-size: 16px;
+        font-size: 13px;
         display: inline-block;
         padding-left: 12px;
       }

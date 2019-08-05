@@ -5,7 +5,8 @@ export default new vuex.Store({
   state: {
     sellers: {},
     goods: [],
-    ratings: []
+    ratings: [],
+    merIsLike:false
   },
   mutations: {
     setSellers(state, data) {
@@ -16,6 +17,9 @@ export default new vuex.Store({
     },
     setRatings(state, data) {
       state.ratings = data;
+    },
+    setIsLike(state, data) {
+      state.merIsLike = data;
     }
   }
 });

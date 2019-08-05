@@ -245,7 +245,6 @@ export default {
   left: 0;
   bottom: 47px;
   width: 100%;
-  z-index: 1;
   background-color: #fff;
   overflow: auto;
   .foodsImg {
@@ -318,6 +317,7 @@ export default {
         color: #fff;
         font-size: 10px;
         line-height: 12px;
+        z-index: 10
       }
     }
   }

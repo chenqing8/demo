@@ -6,11 +6,6 @@
       </transition>
       <span class="text" v-if="food.count>0">{{food.count}}</span>
       <span class="icon add icon-add_circle" @click="add()"></span>
-      <!-- <div class="ball">
-        <ul>
-          <li v-for="(item,index) in 5" :key="index" :class="{'animatice':ids=index}"></li>
-        </ul>
-      </div>-->
     </span>
   </div>
 </template>
@@ -46,6 +41,8 @@ export default {
      */
     remove() {
       this.$set(this.food, this.food.count--);
+      if(this.food.count<=0)
+      this.$emit("clearShopList");
     }
   },
   mounted() {}
@@ -58,24 +55,6 @@ export default {
   .num {
     display: flex;
     align-items: center;
-    // .ball{
-    //   ul{
-    //     li{
-    //       position: absolute;
-    //       right: 2px;
-    //       bottom: 25px;
-    //       display: inline-block;
-    //       width: 20px;
-    //       height: 20px;
-    //       border-radius: 50%;
-    //       background-color: aqua;
-    //       z-index: -1;
-    //       .animatice{
-    //         transform: translate(10,50);
-    //       }
-    //     }
-    //   }
-    // }
     .fade-enter,
     .fade-enter-to {
       opacity: 0;

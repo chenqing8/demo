@@ -124,11 +124,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
         if(!item.islike){
             this.$set(item,"islike",true)
         }else{
-            this.$set(item,"islike",false)            
+            this.$set(item,"islike",false)
         }
         console.log(item);
     },
    ```
- 9. 常用插件：Auto Close Tag、Auto Rename Tag、Beautify、Color Highlight、Image preview、Node.js Modules Intellisense、Path Intellisense、Svg Previe、Vetur
-
- 
