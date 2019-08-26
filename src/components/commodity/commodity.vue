@@ -156,7 +156,6 @@ export default {
   }
 };
 </script>
-
 <style lang="less" scoped>
 @import "../../common/less/common.less";
 .commodity {

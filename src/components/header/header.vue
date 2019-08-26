@@ -111,9 +111,8 @@ export default {
     },
     hideDetial() {
       this.showCountFloat = false;
-    }
-  },
-  mounted() {}
+    },
+  }
 };
 </script>
 

@@ -43,7 +43,19 @@ module.exports = {
     rules: [
       {
         test:/\.less/,
-        loader:['style-loader','css-loader','less-loader']
+        use: [
+          {
+              loader: 'style-loader/useable'
+          },
+          {
+              loader: 'css-loader'
+              // loader: 'file-loader'
+          },
+          {
+              loader: 'less-loader'
+              // loader: 'file-loader'
+          }
+      ]
       },
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
