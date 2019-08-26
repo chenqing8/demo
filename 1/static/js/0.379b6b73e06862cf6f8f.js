@@ -1,0 +1,3 @@
+/*! ****ChenQing edit**** */
+webpackJsonp([0],{"2Cp5":function(t,n){},mj28:function(t,n,e){"use strict";var s={render:function(){var t=this.$createElement,n=this._self._c||t;return n("div",{staticClass:"pannel"},[n("div",{staticClass:"pannel-margin"}),this._v(" "),n("div",{staticClass:"pannel-slot"},[n("div",{staticClass:"header"},[this._t("header")],2),this._v(" "),this._t("content")],2)])},staticRenderFns:[]};var a=e("VU/8")({name:"pannel",data:function(){return{}},components:{},computed:{},methods:{},mounted:function(){}},s,!1,function(t){e("2Cp5")},"data-v-72bc50ce",null);n.a=a.exports}});
+//# sourceMappingURL=0.379b6b73e06862cf6f8f.js.map

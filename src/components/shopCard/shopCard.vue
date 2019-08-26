@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-06 17:37:10
+ * @LastEditTime: 2019-08-19 07:49:33
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="card">
     <div class="shopCard">
@@ -120,7 +127,7 @@ export default {
   }
   .fade-enter-to,
   .fade-leave {
-    transform: translateY(0)    
+    transform: translateY(0)
   }
   .fade-enter-active,
   .fade-leave-active {

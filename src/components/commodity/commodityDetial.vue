@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-06 17:37:10
+ * @LastEditTime: 2019-08-19 07:52:07
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="commodityDetial">
     <img class="foodsImg" :src="foods.image" alt>
@@ -245,7 +252,7 @@ export default {
   left: 0;
   bottom: 47px;
   width: 100%;
-  z-index: 1;
+  z-index: 0;
   background-color: #fff;
   overflow: auto;
   .foodsImg {
