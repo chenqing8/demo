@@ -75,15 +75,15 @@
 </template>
 
 <script>
-import star from "../star/star";
-import pannel from "../slot/pannel";
+import star from '../star/star';
+import pannel from '../slot/pannel';
 export default {
-  name: "pinglun",
+  name: 'pinglun',
   data() {
     return {
       rating: [],
       isShowNotNullContent: false, // 用于传递给详情页面是否展示没有内容的评论
-      rateType: "-1",
+      rateType: '-1',
       all_comment: 0, // 全部评论
       best_comment: 0, // 推荐评论
       bad_comment: 0, // 吐槽评论
@@ -95,15 +95,15 @@ export default {
     };
   },
   components: {
-    "v-star": star,
-    "v-pannel": pannel
+    'v-star': star,
+    'v-pannel': pannel
   },
   computed: {
     // 时间戳，转换日期
     dateTime() {
       let times = [];
       function add0(m) {
-        return m < 10 ? "0" + m : m;
+        return m < 10 ? '0' + m : m;
       }
       this.rating.map((item, index) => {
         let time = new Date(item.rateTime);
@@ -126,7 +126,7 @@ export default {
       let list = [];
       let type;
       this.rating.map((item, index) => {
-        if (item.text !== "") {
+        if (item.text !== '') {
           list.push(item);
         }
         type = item.rateType;
@@ -148,11 +148,11 @@ export default {
       // this.all_comment = allnum;
       // this.best_comment = bestnum;
       // this.bad_comment = badnum;
-      if (this.rateType === "0") {
+      if (this.rateType === '0') {
         return [allList, allnum, bestnum, badnum];
-      } else if (this.rateType === "1") {
+      } else if (this.rateType === '1') {
         return [bestList, allnum, bestnum, badnum];
-      } else if (this.rateType === "2") {
+      } else if (this.rateType === '2') {
         return [badList, allnum, bestnum, badnum];
       } else if (!this.isShowNotNullContent) {
         return [this.rating, allnum, bestnum, badnum];
@@ -171,9 +171,9 @@ export default {
     isOrNoLike(index) {
       let item = this.rating[index];
       if (!item.islike) {
-        this.$set(item, "islike", true);
+        this.$set(item, 'islike', true);
       } else {
-        this.$set(item, "islike", false);
+        this.$set(item, 'islike', false);
       }
     },
     /**
@@ -198,19 +198,19 @@ export default {
     },
     _all() {
       this.isShowNotNullContent = false;
-      this.rateType = "0";
+      this.rateType = '0';
     },
     best() {
       this.isShowNotNullContent = false;
-      this.rateType = "1";
+      this.rateType = '1';
     },
     _bad() {
       this.isShowNotNullContent = false;
-      this.rateType = "2";
+      this.rateType = '2';
     }
   },
   mounted() {
-    this.$http.get("/ratings").then(res => {
+    this.$http.get('/ratings').then(res => {
       if (res.status === 200) {
         this.rating = res.data;
       }

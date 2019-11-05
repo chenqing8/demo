@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-06 17:37:10
- * @LastEditTime: 2019-08-19 07:52:07
+ * @LastEditTime: 2019-09-06 16:47:55
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -83,23 +83,23 @@
 </template>
 
 <script>
-import pannel from "../slot/pannel";
-import contorNum from "../shopCard/contorNum";
+import pannel from '../slot/pannel';
+import contorNum from '../shopCard/contorNum';
 export default {
-  name: "commodityDetial",
-  props: ["foods"],
+  name: 'commodityDetial',
+  props: ['foods'],
   data() {
     return {
       isShowNotNullContent: false, // 用于传递给详情页面是否展示没有内容的评论
-      rateType: "-1",
+      rateType: '-1',
       all_comment: 0, // 全部评论
       best_comment: 0, // 推荐评论
       bad_comment: 0 // 吐槽评论
     };
   },
   components: {
-    "v-pannel": pannel,
-    "v-contorNum": contorNum
+    'v-pannel': pannel,
+    'v-contorNum': contorNum
   },
   computed: {
     // 是否展示加入购物车按钮
@@ -115,7 +115,7 @@ export default {
       let dataTimer = this.foods.ratings;
       let times = [];
       function add0(m) {
-        return m < 10 ? "0" + m : m;
+        return m < 10 ? '0' + m : m;
       }
       dataTimer.map((item, index) => {
         let time = new Date(item.rateTime);
@@ -138,7 +138,7 @@ export default {
       let list = [];
       let type;
       this.foods.ratings.map((item, index) => {
-        if (item.text !== "") {
+        if (item.text !== '') {
           list.push(item);
         }
         type = item.rateType;
@@ -160,11 +160,11 @@ export default {
       // this.all_comment = allnum;
       // this.best_comment = bestnum;
       // this.bad_comment = badnum;
-      if (this.rateType === "0") {
+      if (this.rateType === '0') {
         return [allList, allnum, bestnum, badnum];
-      } else if (this.rateType === "1") {
+      } else if (this.rateType === '1') {
         return [bestList, allnum, bestnum, badnum];
-      } else if (this.rateType === "2") {
+      } else if (this.rateType === '2') {
         return [badList, allnum, bestnum, badnum];
       } else if (!this.isShowNotNullContent) {
         return [this.rating, allnum, bestnum, badnum];
@@ -191,7 +191,7 @@ export default {
      * @desc
      */
     goback() {
-      this.$emit("goback");
+      this.$emit('goback');
     },
     /**
      * @method isOrNoLike
@@ -202,9 +202,9 @@ export default {
     isOrNoLike(index) {
       let item = this.foods.ratings[index];
       if (!item.islike) {
-        this.$set(item, "islike", true);
+        this.$set(item, 'islike', true);
       } else {
-        this.$set(item, "islike", false);
+        this.$set(item, 'islike', false);
       }
     },
     /**
@@ -229,15 +229,15 @@ export default {
     },
     _all() {
       this.isShowNotNullContent = false;
-      this.rateType = "0";
+      this.rateType = '0';
     },
     best() {
       this.isShowNotNullContent = false;
-      this.rateType = "1";
+      this.rateType = '1';
     },
     _bad() {
       this.isShowNotNullContent = false;
-      this.rateType = "2";
+      this.rateType = '2';
     }
   },
   mounted() {}
@@ -252,10 +252,7 @@ export default {
   left: 0;
   bottom: 47px;
   width: 100%;
-<<<<<<< HEAD
   z-index: 0;
-=======
->>>>>>> dd89959f97096c0eb236903add0a2d1be7e1527c
   background-color: #fff;
   overflow: auto;
   .foodsImg {

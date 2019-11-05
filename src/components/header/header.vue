@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-06 17:37:10
+ * @LastEditTime: 2019-09-06 16:51:34
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="header">
     <!-- 头部内容区域 -->
@@ -111,7 +118,7 @@ export default {
     },
     hideDetial() {
       this.showCountFloat = false;
-    },
+    }
   }
 };
 </script>

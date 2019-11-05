@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-06 17:37:10
+ * @LastEditTime: 2019-09-06 16:54:31
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="Merchant">
     <div class="header">
@@ -73,26 +80,26 @@
 </template>
 
 <script>
-import star from "../star/star";
-import pannel from "../slot/pannel";
+import star from '../star/star';
+import pannel from '../slot/pannel';
 export default {
-  name: "Merchant",
+  name: 'Merchant',
   data() {
     return {
-      suppersClass: ["decrease", "discount", "guarantee", "invoice", "special"], // 控制活动标志的类
+      suppersClass: ['decrease', 'discount', 'guarantee', 'invoice', 'special'], // 控制活动标志的类
       sellers: {},
       merIsLike: this.$store.state.merIsLike // 收藏商家
     };
   },
   components: {
-    "v-star": star,
-    "v-pannel": pannel
+    'v-star': star,
+    'v-pannel': pannel
   },
   computed: {},
   methods: {
     IsLike() {
       this.merIsLike = !this.merIsLike;
-      this.$store.commit('setIsLike',this.merIsLike)
+      this.$store.commit('setIsLike', this.merIsLike);
     }
   },
   mounted() {

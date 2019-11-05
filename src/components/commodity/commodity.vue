@@ -59,23 +59,23 @@
 </template>
 
 <script>
-import contorNum from "../shopCard/contorNum";
-import commodityDetial from "../commodity/commodityDetial";
+import contorNum from '../shopCard/contorNum';
+import commodityDetial from '../commodity/commodityDetial';
 export default {
-  name: "commodity",
+  name: 'commodity',
   data() {
     return {
       goods: [], // 商品数据
-      suppersClass: ["decrease", "discount", "guarantee", "invoice", "special"], // 控制活动标志的类
-      deliveryPrice: "", // 配送费
-      minPrice: "", // 起送费
+      suppersClass: ['decrease', 'discount', 'guarantee', 'invoice', 'special'], // 控制活动标志的类
+      deliveryPrice: '', // 配送费
+      minPrice: '', // 起送费
       showFoodsDetial: false, // 展示商品详情页
       foodslist: {} // 商品详情信息
     };
   },
   components: {
-    "v-contorNum": contorNum,
-    "v-commodityDetial": commodityDetial
+    'v-contorNum': contorNum,
+    'v-commodityDetial': commodityDetial
   },
   computed: {},
   methods: {
@@ -86,21 +86,21 @@ export default {
      * @desc 滚动右侧商品，对应左侧高亮
      */
     scroll(inx) {
-      let titleNames = $(".foods>.foods-item");
-      let menus = $(".menu-item");
+      let titleNames = $('.foods>.foods-item');
+      let menus = $('.menu-item');
       let index = 0;
-      menus.eq(0).addClass("active");
-      $(".foods").scroll(() => {
+      menus.eq(0).addClass('active');
+      $('.foods').scroll(() => {
         this.$nextTick(() => {
           if (
-            $(".foods").scrollTop() >=
+            $('.foods').scrollTop() >=
             titleNames.eq(index)[0].offsetTop - 1
           ) {
             menus
               .eq(index)
-              .addClass("active")
+              .addClass('active')
               .siblings()
-              .removeClass("active");
+              .removeClass('active');
             if (index < titleNames.length - 1) {
               index = index + 1;
             } else {
@@ -114,9 +114,9 @@ export default {
             }
             menus
               .eq(index)
-              .addClass("active")
+              .addClass('active')
               .siblings()
-              .removeClass("active");
+              .removeClass('active');
           }
         });
       });
@@ -129,9 +129,9 @@ export default {
      */
     foodsDetial(index) {
       this.$nextTick(() => {
-        let titleNames = $(".foods>.foods-item");
+        let titleNames = $('.foods>.foods-item');
         let sTop = titleNames.eq(index)[0].offsetTop;
-        $(".foods").animate({ scrollTop: sTop }, 1000);
+        $('.foods').animate({ scrollTop: sTop }, 1000);
       });
     },
     /**

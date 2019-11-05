@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-06 17:37:10
- * @LastEditTime: 2019-08-19 07:49:33
+ * @LastEditTime: 2019-09-06 16:58:23
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -53,17 +53,17 @@
 </template>
 
 <script>
-import contorNum from "../shopCard/contorNum";
+import contorNum from '../shopCard/contorNum';
 export default {
-  name: "shopCard",
-  props: ["deliveryPrice", "minPrice", "shopCardList"],
+  name: 'shopCard',
+  props: ['deliveryPrice', 'minPrice', 'shopCardList'],
   data() {
     return {
       showCardList: false
     };
   },
   components: {
-    "v-contorNum": contorNum
+    'v-contorNum': contorNum
   },
   computed: {
     /**
@@ -100,8 +100,9 @@ export default {
      * @desc 用来显示或者隐藏遮罩
      */
     showSopCard() {
-      if(this.total[1]>0)
-      this.showCardList = !this.showCardList;
+      if (this.total[1] > 0) {
+        this.showCardList = !this.showCardList;
+      }
     },
     /**
      * @method clear
@@ -112,9 +113,9 @@ export default {
     clear() {
       this.$set(this.shopCardList, []);
       this.showCardList = false;
-      this.$emit("clear");
+      this.$emit('clear');
     },
-    clearShopList(){
+    clearShopList() {
       this.showCardList = false;
     }
   },
@@ -127,11 +128,11 @@ export default {
   font-size: 0;
   .fade-enter,
   .fade-leave-to {
-    transform: translateY(210px)
+    transform: translateY(210px);
   }
   .fade-enter-to,
   .fade-leave {
-    transform: translateY(0)
+    transform: translateY(0);
   }
   .fade-enter-active,
   .fade-leave-active {

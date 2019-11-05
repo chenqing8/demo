@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-06 17:37:09
+ * @LastEditTime: 2019-09-06 16:55:09
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="app">
     <v-header :headerData="headerDataList"></v-header>
@@ -6,10 +13,10 @@
         <router-link tag="a" to="/commodity">商品</router-link>
       </div>
       <div class="tab_item">
-        <router-link tag="a" to="/Merchant">商家</router-link>        
+        <router-link tag="a" to="/Merchant">商家</router-link>
       </div>
       <div class="tab_item">
-        <router-link tag="a" to="/pinglun">评论</router-link>        
+        <router-link tag="a" to="/pinglun">评论</router-link>
       </div>
     </div>
     <router-view></router-view>
@@ -36,9 +43,9 @@ export default {
       goods: [],
       deliveryPrice: 0,
       minPrice: 0,
-      totalCol: 24, //总列数
-      labelCol: 0, //label所占列数
-      colWidth: 40, //每单位宽度
+      totalCol: 24, // 总列数
+      labelCol: 0, // label所占列数
+      colWidth: 40 // 每单位宽度
     };
   },
   components: {

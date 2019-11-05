@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-07-06 17:37:10
+ * @LastEditTime: 2019-09-06 16:56:40
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="contorNum">
     <span class="num">
@@ -41,8 +48,9 @@ export default {
      */
     remove() {
       this.$set(this.food, this.food.count--);
-      if(this.food.count<=0)
-      this.$emit("clearShopList");
+      if (this.food.count <= 0) {
+        this.$emit("clearShopList");
+      }
     }
   },
   mounted() {}
